@@ -17,8 +17,8 @@ int main(int argc, const char * argv[]) {
         // insert code here...
         NSLog(@"Hello, World!");
         
-        NSArray *list = [FileManager attributedContentAtPath:TEST];
-        
+        NSArray *list = [FileManager filesAtPath:TEST];
+        NSLog(@"Desde: %f", ((File *)list[0]).modified.timeIntervalSince1970);
     }
     return 0;
 }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		EA486F3D1EB23A21008A8A72 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EA486F3C1EB23A21008A8A72 /* main.m */; };
 		EA486F451EB23A32008A8A72 /* FileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EA486F441EB23A32008A8A72 /* FileManager.m */; };
+		EA486F491EB24767008A8A72 /* File.m in Sources */ = {isa = PBXBuildFile; fileRef = EA486F481EB24767008A8A72 /* File.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +29,8 @@
 		EA486F3C1EB23A21008A8A72 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EA486F431EB23A32008A8A72 /* FileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileManager.h; sourceTree = "<group>"; };
 		EA486F441EB23A32008A8A72 /* FileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileManager.m; sourceTree = "<group>"; };
+		EA486F471EB24767008A8A72 /* File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = File.h; sourceTree = "<group>"; };
+		EA486F481EB24767008A8A72 /* File.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = File.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,10 +64,20 @@
 			isa = PBXGroup;
 			children = (
 				EA486F3C1EB23A21008A8A72 /* main.m */,
-				EA486F431EB23A32008A8A72 /* FileManager.h */,
-				EA486F441EB23A32008A8A72 /* FileManager.m */,
+				EA486F461EB24742008A8A72 /* FileManager */,
 			);
 			path = EmulatorFileManager;
+			sourceTree = "<group>";
+		};
+		EA486F461EB24742008A8A72 /* FileManager */ = {
+			isa = PBXGroup;
+			children = (
+				EA486F431EB23A32008A8A72 /* FileManager.h */,
+				EA486F441EB23A32008A8A72 /* FileManager.m */,
+				EA486F471EB24767008A8A72 /* File.h */,
+				EA486F481EB24767008A8A72 /* File.m */,
+			);
+			name = FileManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,6 +140,7 @@
 			files = (
 				EA486F3D1EB23A21008A8A72 /* main.m in Sources */,
 				EA486F451EB23A32008A8A72 /* FileManager.m in Sources */,
+				EA486F491EB24767008A8A72 /* File.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,6 +271,7 @@
 				EA486F421EB23A21008A8A72 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

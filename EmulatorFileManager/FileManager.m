@@ -18,6 +18,18 @@
     return [DEFAULTFILEMANAGER fileExistsAtPath:aPath];
 }
 
++ (NSArray<File *> *)filesAtPath:(NSString *)aPath {
+    NSArray *content = [[self class] attributedContentAtPath:aPath];
+    NSMutableArray *files = [NSMutableArray new];
+    
+    for (NSDictionary *attributes in content) {
+        File *file = [[File alloc] initWithDictionary:attributes];
+        [files addObject:file];
+    }
+    
+    return files.copy;
+}
+
 + (NSArray *)attributedContentAtPath:(NSString *)aPath {
     if (![[self class] pathExist:aPath]) {
         return nil;

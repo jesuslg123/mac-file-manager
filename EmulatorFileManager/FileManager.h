@@ -7,10 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "File.h"
 
 @interface FileManager : NSObject
 
 + (BOOL)pathExist:(NSString *)aPath;
-+ (NSArray *)attributedContentAtPath:(NSString *)aPath;
++ (NSArray<NSDictionary *> *)attributedContentAtPath:(NSString *)aPath;
++ (NSArray<File *> *)filesAtPath:(NSString *)aPath;
+
 
 @end
