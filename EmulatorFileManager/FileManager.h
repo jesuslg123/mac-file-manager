@@ -12,8 +12,12 @@
 @interface FileManager : NSObject
 
 + (BOOL)pathExist:(NSString *)aPath;
+
 + (NSArray<NSDictionary *> *)attributedContentAtPath:(NSString *)aPath;
+
 + (NSArray<File *> *)filesAtPath:(NSString *)aPath;
++ (NSArray<File *> *)filesExtension:(NSString *)aExtension atPath:(NSString *)aPath;
++ (NSArray<File *> *)filesType:(NSFileAttributeType)aType atPath:(NSString *)aPath;
 
 
 @end

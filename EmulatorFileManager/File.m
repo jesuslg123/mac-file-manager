@@ -20,8 +20,16 @@
 - (void)setDataFromDictionary:(NSDictionary *__nonnull)aDictionary {
     self.created = aDictionary[@"NSFileCreationDate"];
     self.modified = aDictionary[@"NSFileModificationDate"];
-    self.fullPath = aDictionary[@"FILE_PATH"];
     self.fileType = aDictionary[@"NSFileType"];
+    
+    self.path = aDictionary[@"FILE_PATH"];
+    self.name = aDictionary[@"FILE_NAME"];
+}
+
+#pragma mark - Getters
+
+- (NSString *)fullPath {
+    return [NSString stringWithFormat:@"%@/%@", self.path, self.name];
 }
 
 @end

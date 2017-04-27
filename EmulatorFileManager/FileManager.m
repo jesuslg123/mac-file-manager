@@ -7,15 +7,28 @@
 //
 
 #import "FileManager.h"
+#import "NSArray+FMTools.h"
 
 #define DEFAULTFILEMANAGER [NSFileManager defaultManager]
-#define KEY_PATH @"FILE_PATH"
+#define KEY_FILE_PATH @"FILE_PATH"
+#define KEY_FILE_NAME @"FILE_NAME"
 
 @implementation FileManager
 
+#pragma mark - Publics methods
 
 + (BOOL)pathExist:(NSString *)aPath {
     return [DEFAULTFILEMANAGER fileExistsAtPath:aPath];
+}
+
++ (NSArray<File *> *)filesExtension:(NSString *)aExtension atPath:(NSString *)aPath {
+    NSArray *files = [[self class] filesAtPath:aPath];
+    return [[self class] filter:files byExtension:aExtension];
+}
+
++ (NSArray<File *> *)filesType:(NSFileAttributeType)aType atPath:(NSString *)aPath {
+    NSArray *files = [[self class] filesAtPath:aPath];
+    return [[self class] filter:files byType:aType];
 }
 
 + (NSArray<File *> *)filesAtPath:(NSString *)aPath {
@@ -42,33 +55,48 @@
     
     if (!error) {
         for (NSString *filePath in content) {
-            NSString *fullPath = [[self class] append:filePath toPath:aPath];
-            [attributedContent addObject:[[self class] addPath:fullPath toAttributes:[[self class] attributesOfPath:fullPath]]];
+            NSString *fullFilePath = [[self class] append:filePath toPath:aPath];
+            NSDictionary *fileAttributes = [[self class] attributesOfPath:fullFilePath];
+            [attributedContent addObject:[[self class] addFile:filePath path:aPath toAttributes:fileAttributes]];
         }
     }
     
     return attributedContent;
 }
 
+#pragma mark - Privated Methods
+
 + (NSDictionary *)attributesOfPath:(NSString *)aPath {
     NSError *error;
     return [DEFAULTFILEMANAGER attributesOfItemAtPath:aPath error:&error];
 }
 
-+ (NSDictionary *)addPath:(NSString *)aPath toAttributes:(NSDictionary *)attributes {
++ (NSDictionary *)addFile:(NSString *)aName path:(NSString *)aPath toAttributes:(NSDictionary *)attributes {
     if (attributes == nil) {
         attributes = [NSDictionary new];
     }
     
     NSMutableDictionary *attributedPathDictionary = [NSMutableDictionary dictionaryWithDictionary:attributes];
     
-    [attributedPathDictionary setValue:aPath forKey:KEY_PATH];
+    [attributedPathDictionary setValue:aName forKey:KEY_FILE_NAME];
+    [attributedPathDictionary setValue:aPath forKey:KEY_FILE_PATH];
     
     return attributedPathDictionary.copy;
 }
 
 + (NSString *)append:(NSString *)aName toPath:(NSString *)aPath {
     return [NSString stringWithFormat:@"%@/%@",aPath, aName];
+}
+
++ (NSArray *)filter:(NSArray *)aFiles byExtension:(NSString *)aExtension {
+    return [aFiles filterBy:@"name" endingValue:aExtension];
+}
+
++ (NSArray *)filter:(NSArray *)aFiles byType:(NSFileAttributeType)aType {
+    //TODO: Convert type to string???? Or save type...
+    [NSException raise:NSInternalInconsistencyException
+                format:@"Method %@ not implemented", NSStringFromSelector(_cmd)];
+    return [aFiles filterBy:@"fileType" value:@"aType"];
 }
 
 @end
