@@ -21,6 +21,8 @@
     return [DEFAULTFILEMANAGER fileExistsAtPath:aPath];
 }
 
+#pragma mark - Get files
+
 + (NSArray<File *> *)filesType:(NSFileAttributeType)aType extension:(NSString *)aExtension atPath:(NSString *)aPath {
     NSArray *files = [[self class] filesExtension:aExtension atPath:aPath];
     return [[self class] filter:files byType:aType];
@@ -47,6 +49,8 @@
     
     return files.copy;
 }
+
+#pragma mark - Get attributed content
 
 + (NSArray *)attributedContentAtPath:(NSString *)aPath {
     if (![[self class] pathExist:aPath]) {
@@ -93,13 +97,13 @@
     return [NSString stringWithFormat:@"%@/%@",aPath, aName];
 }
 
+#pragma mark - Filters
+
 + (NSArray *)filter:(NSArray *)aFiles byExtension:(NSString *)aExtension {
     return [aFiles filterBy:@"name" endingValue:aExtension];
 }
 
 + (NSArray *)filter:(NSArray *)aFiles byType:(NSFileAttributeType)aType {
-    //TODO: Convert type to string???? Or save type...
-    //[NSException raise:NSInternalInconsistencyException format:@"Method %@ not implemented", NSStringFromSelector(_cmd)];
     return [aFiles filterBy:@"fileType" value:aType];
 }
 

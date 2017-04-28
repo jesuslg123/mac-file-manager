@@ -11,14 +11,14 @@
 
 @interface FileManager : NSObject
 
-+ (BOOL)pathExist:(NSString *)aPath;
++ (BOOL)pathExist:(NSString *__nonnull)aPath;
 
-+ (NSArray<NSDictionary *> *)attributedContentAtPath:(NSString *)aPath;
++ (NSArray<NSDictionary *> *__nullable)attributedContentAtPath:(NSString *__nonnull)aPath;
 
-+ (NSArray<File *> *)filesAtPath:(NSString *)aPath;
-+ (NSArray<File *> *)filesExtension:(NSString *)aExtension atPath:(NSString *)aPath;
-+ (NSArray<File *> *)filesType:(NSFileAttributeType)aType atPath:(NSString *)aPath;
-+ (NSArray<File *> *)filesType:(NSFileAttributeType)aType extension:(NSString *)aExtension atPath:(NSString *)aPath;
++ (NSArray<File *> *__nullable)filesAtPath:(NSString *__nonnull)aPath;
++ (NSArray<File *> *__nullable)filesExtension:(NSString *__nonnull)aExtension atPath:(NSString *__nonnull)aPath;
++ (NSArray<File *> *__nullable)filesType:(NSFileAttributeType __nonnull)aType atPath:(NSString *__nonnull)aPath;
++ (NSArray<File *> *__nullable)filesType:(NSFileAttributeType __nonnull)aType extension:(NSString *__nonnull)aExtension atPath:(NSString *__nonnull)aPath;
 
 
 @end
