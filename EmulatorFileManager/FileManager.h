@@ -18,6 +18,7 @@
 + (NSArray<File *> *)filesAtPath:(NSString *)aPath;
 + (NSArray<File *> *)filesExtension:(NSString *)aExtension atPath:(NSString *)aPath;
 + (NSArray<File *> *)filesType:(NSFileAttributeType)aType atPath:(NSString *)aPath;
++ (NSArray<File *> *)filesType:(NSFileAttributeType)aType extension:(NSString *)aExtension atPath:(NSString *)aPath;
 
 
 @end

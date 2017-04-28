@@ -14,9 +14,9 @@
 
 @property (strong, nonatomic, nonnull) NSString *name;
 @property (strong, nonatomic, nonnull) NSString *path;
-@property (strong, nonatomic, nonnull) NSString *fileType;
 @property (strong, nonatomic, nonnull) NSDate *created;
 @property (strong, nonatomic, nonnull) NSDate *modified;
+@property (nonatomic, nonnull) NSFileAttributeType fileType;
 
 - (instancetype __nullable)initWithDictionary:(NSDictionary *__nonnull)aDictionary;
 

@@ -21,6 +21,11 @@
     return [DEFAULTFILEMANAGER fileExistsAtPath:aPath];
 }
 
++ (NSArray<File *> *)filesType:(NSFileAttributeType)aType extension:(NSString *)aExtension atPath:(NSString *)aPath {
+    NSArray *files = [[self class] filesExtension:aExtension atPath:aPath];
+    return [[self class] filter:files byType:aType];
+}
+
 + (NSArray<File *> *)filesExtension:(NSString *)aExtension atPath:(NSString *)aPath {
     NSArray *files = [[self class] filesAtPath:aPath];
     return [[self class] filter:files byExtension:aExtension];
@@ -94,9 +99,8 @@
 
 + (NSArray *)filter:(NSArray *)aFiles byType:(NSFileAttributeType)aType {
     //TODO: Convert type to string???? Or save type...
-    [NSException raise:NSInternalInconsistencyException
-                format:@"Method %@ not implemented", NSStringFromSelector(_cmd)];
-    return [aFiles filterBy:@"fileType" value:@"aType"];
+    //[NSException raise:NSInternalInconsistencyException format:@"Method %@ not implemented", NSStringFromSelector(_cmd)];
+    return [aFiles filterBy:@"fileType" value:aType];
 }
 
 @end
