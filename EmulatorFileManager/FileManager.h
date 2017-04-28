@@ -20,5 +20,10 @@
 + (NSArray<File *> *__nullable)filesType:(NSFileAttributeType __nonnull)aType atPath:(NSString *__nonnull)aPath;
 + (NSArray<File *> *__nullable)filesType:(NSFileAttributeType __nonnull)aType extension:(NSString *__nonnull)aExtension atPath:(NSString *__nonnull)aPath;
 
++ (NSArray <File *>*__nullable)recursiveFilesAtPath:(NSString *__nonnull)aPath ;
++ (NSArray<File *> *__nullable)recursiveFilesExtension:(NSString *__nonnull)aExtension atPath:(NSString *__nonnull)aPath;
++ (NSArray<File *> *__nullable)recursiveFilesType:(NSFileAttributeType __nonnull)aType atPath:(NSString *__nonnull)aPath;
++ (NSArray<File *> *__nullable)recursiveFilesType:(NSFileAttributeType __nullable)aType extension:(NSString *__nullable)aExtension atPath:(NSString *__nonnull)aPath;
+
 
 @end

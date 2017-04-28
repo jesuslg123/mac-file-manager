@@ -17,7 +17,9 @@ int main(int argc, const char * argv[]) {
         // insert code here...
         NSLog(@"Hello, World!");
         
-        NSArray *list = [FileManager filesType:NSFileTypeRegular extension:@".plist" atPath:TEST];
+        NSArray *list = [FileManager recursiveFilesAtPath:TEST];
+        //NSArray *list = [FileManager recursiveFilesType:NSFileTypeRegular extension:@".plist" atPath:TEST];
+        //NSArray *list = [FileManager recursiveFilesType:NSFileTypeDirectory atPath:TEST];
         NSLog(@"Desde: %@", ((File *)list[0]).fullPath);
         
     }

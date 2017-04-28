@@ -23,21 +23,6 @@
 
 #pragma mark - Get files
 
-+ (NSArray<File *> *)filesType:(NSFileAttributeType)aType extension:(NSString *)aExtension atPath:(NSString *)aPath {
-    NSArray *files = [[self class] filesExtension:aExtension atPath:aPath];
-    return [[self class] filter:files byType:aType];
-}
-
-+ (NSArray<File *> *)filesExtension:(NSString *)aExtension atPath:(NSString *)aPath {
-    NSArray *files = [[self class] filesAtPath:aPath];
-    return [[self class] filter:files byExtension:aExtension];
-}
-
-+ (NSArray<File *> *)filesType:(NSFileAttributeType)aType atPath:(NSString *)aPath {
-    NSArray *files = [[self class] filesAtPath:aPath];
-    return [[self class] filter:files byType:aType];
-}
-
 + (NSArray<File *> *)filesAtPath:(NSString *)aPath {
     NSArray *content = [[self class] attributedContentAtPath:aPath];
     NSMutableArray *files = [NSMutableArray new];
@@ -48,6 +33,50 @@
     }
     
     return files.copy;
+}
+
++ (NSArray<File *> *)filesType:(NSFileAttributeType)aType atPath:(NSString *)aPath {
+    NSArray *files = [[self class] filesAtPath:aPath];
+    return [[self class] filter:files byType:aType];
+}
+
++ (NSArray<File *> *)filesExtension:(NSString *)aExtension atPath:(NSString *)aPath {
+    NSArray *files = [[self class] filesAtPath:aPath];
+    return [[self class] filter:files byExtension:aExtension];
+}
+
++ (NSArray<File *> *)filesType:(NSFileAttributeType)aType extension:(NSString *)aExtension atPath:(NSString *)aPath {
+    NSArray *files = [[self class] filesExtension:aExtension atPath:aPath];
+    return [[self class] filter:files byType:aType];
+}
+
+#pragma mark - Recursive Get Files
+
++ (NSArray <File *>*)recursiveFilesAtPath:(NSString *)aPath {
+    return [[self class] recursiveFilesType:nil extension:nil atPath:aPath];
+}
+
++ (NSArray<File *> *)recursiveFilesType:(NSFileAttributeType)aType atPath:(NSString *)aPath {
+    return [[self class] recursiveFilesType:aType extension:nil atPath:aPath];
+}
+
++ (NSArray<File *> *)recursiveFilesExtension:(NSString *)aExtension atPath:(NSString *)aPath {
+    return [[self class] recursiveFilesType:nil extension:aExtension atPath:aPath];
+}
+
++ (NSArray<File *> *)recursiveFilesType:(NSFileAttributeType)aType extension:(NSString *)aExtension atPath:(NSString *)aPath {
+    NSArray *currentPathFiles = [[self class] filesAtPath:aPath];
+    NSMutableArray *allFiles = [NSMutableArray arrayWithArray:[[self class] filter:currentPathFiles byType:aType extension:aExtension]];
+    
+    for (File *file in currentPathFiles) {
+        if ([file.fileType isEqualToString:NSFileTypeDirectory]) {
+            NSString *nextPath = [[self class] append:file.name toPath:aPath];
+            NSArray *nextPathFiles = [[self class] filesAtPath:nextPath];
+            [allFiles addObjectsFromArray:[[self class] filter:nextPathFiles byType:aType extension:aExtension]];
+        }
+    }
+    
+    return allFiles;
 }
 
 #pragma mark - Get attributed content
@@ -105,6 +134,17 @@
 
 + (NSArray *)filter:(NSArray *)aFiles byType:(NSFileAttributeType)aType {
     return [aFiles filterBy:@"fileType" value:aType];
+}
+
++ (NSArray *)filter:(NSArray *)aFiles byType:(NSFileAttributeType)aType extension:(NSString *)aExtension {
+    NSArray *filtered = aFiles.copy;
+    if (aType != nil ) {
+        filtered = [[self class] filter:aFiles byType:aType];
+    }
+    if (aExtension != nil) {
+        filtered = [[self class] filter:filtered byExtension:aExtension];
+    }
+    return filtered;
 }
 
 @end
