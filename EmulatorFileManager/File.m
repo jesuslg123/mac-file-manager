@@ -18,9 +18,9 @@
 }
 
 - (void)setDataFromDictionary:(NSDictionary *__nonnull)aDictionary {
-    self.created = aDictionary[@"NSFileCreationDate"];
-    self.modified = aDictionary[@"NSFileModificationDate"];
-    self.fileType = aDictionary[@"NSFileType"];
+    self.created = aDictionary[NSFileCreationDate];
+    self.modified = aDictionary[NSFileModificationDate];
+    self.fileType = aDictionary[NSFileType];
     
     self.path = aDictionary[@"FILE_PATH"];
     self.name = aDictionary[@"FILE_NAME"];
