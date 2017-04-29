@@ -71,7 +71,7 @@
     for (File *file in currentPathFiles) {
         if ([file.fileType isEqualToString:NSFileTypeDirectory]) {
             NSString *nextPath = [[self class] append:file.name toPath:aPath];
-            NSArray *nextPathFiles = [[self class] filesAtPath:nextPath];
+            NSArray *nextPathFiles = [[self class] recursiveFilesAtPath:nextPath];
             [allFiles addObjectsFromArray:[[self class] filter:nextPathFiles byType:aType extension:aExtension]];
         }
     }
