@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EA267F051EB60CB9002225CA /* EmulatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EA267F041EB60CB9002225CA /* EmulatorManager.m */; };
-		EA267F091EB60D12002225CA /* FileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EA267F081EB60D12002225CA /* FileManager.m */; };
-		EA267F0F1EB60D2E002225CA /* NSArray+FMTools.m in Sources */ = {isa = PBXBuildFile; fileRef = EA267F0E1EB60D2E002225CA /* NSArray+FMTools.m */; };
+		EA267F101EB60D9E002225CA /* EmulatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EA267F041EB60CB9002225CA /* EmulatorManager.m */; };
+		EA267F111EB60D9E002225CA /* File.m in Sources */ = {isa = PBXBuildFile; fileRef = EA267F0C1EB60D1D002225CA /* File.m */; };
+		EA267F121EB60D9E002225CA /* FileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EA267F081EB60D12002225CA /* FileManager.m */; };
+		EA267F131EB60D9E002225CA /* NSArray+FMTools.m in Sources */ = {isa = PBXBuildFile; fileRef = EA267F0E1EB60D2E002225CA /* NSArray+FMTools.m */; };
 		EA486F3D1EB23A21008A8A72 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EA486F3C1EB23A21008A8A72 /* main.m */; };
 /* End PBXBuildFile section */
 
@@ -172,10 +173,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA267F101EB60D9E002225CA /* EmulatorManager.m in Sources */,
+				EA267F111EB60D9E002225CA /* File.m in Sources */,
+				EA267F121EB60D9E002225CA /* FileManager.m in Sources */,
+				EA267F131EB60D9E002225CA /* NSArray+FMTools.m in Sources */,
 				EA486F3D1EB23A21008A8A72 /* main.m in Sources */,
-				EA267F051EB60CB9002225CA /* EmulatorManager.m in Sources */,
-				EA267F091EB60D12002225CA /* FileManager.m in Sources */,
-				EA267F0F1EB60D2E002225CA /* NSArray+FMTools.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
