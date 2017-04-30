@@ -24,60 +24,39 @@
 #pragma mark - Get files
 
 + (NSArray<File *> *)filesAtPath:(NSString *)aPath {
-    NSArray *content = [[self class] attributedContentAtPath:aPath];
-    NSMutableArray *files = [NSMutableArray new];
-    
-    for (NSDictionary *attributes in content) {
-        File *file = [[File alloc] initWithDictionary:attributes];
-        [files addObject:file];
-    }
-    
-    return files.copy;
+    return [[self class] recursiveFilesAtPath:aPath maxLevel:0];
 }
 
 + (NSArray<File *> *)filesType:(NSFileAttributeType)aType atPath:(NSString *)aPath {
-    NSArray *files = [[self class] filesAtPath:aPath];
-    return [[self class] filter:files byType:aType];
+    return [[self class] recursiveFilesType:aType atPath:aPath maxLevel:0];
 }
 
 + (NSArray<File *> *)filesExtension:(NSString *)aExtension atPath:(NSString *)aPath {
-    NSArray *files = [[self class] filesAtPath:aPath];
-    return [[self class] filter:files byExtension:aExtension];
+    return [[self class] recursiveFilesExtension:aExtension atPath:aPath maxLevel:0];
 }
 
 + (NSArray<File *> *)filesType:(NSFileAttributeType)aType extension:(NSString *)aExtension atPath:(NSString *)aPath {
-    NSArray *files = [[self class] filesExtension:aExtension atPath:aPath];
-    return [[self class] filter:files byType:aType];
+    return [[self class] recursiveFilesType:aType extension:aExtension atPath:aPath maxLevel:0];
 }
 
 #pragma mark - Recursive Get Files
 
-+ (NSArray <File *>*)recursiveFilesAtPath:(NSString *)aPath {
-    return [[self class] recursiveFilesType:nil extension:nil atPath:aPath];
++ (NSArray <File *>*)recursiveFilesAtPath:(NSString *)aPath maxLevel:(NSInteger)maxLevel {
+    return [[self class] recursiveFilesType:nil extension:nil atPath:aPath maxLevel:maxLevel currentLevel:0];
 }
 
-+ (NSArray<File *> *)recursiveFilesType:(NSFileAttributeType)aType atPath:(NSString *)aPath {
-    return [[self class] recursiveFilesType:aType extension:nil atPath:aPath];
++ (NSArray<File *> *)recursiveFilesType:(NSFileAttributeType)aType atPath:(NSString *)aPath maxLevel:(NSInteger)maxLevel {
+    return [[self class] recursiveFilesType:aType extension:nil atPath:aPath maxLevel:maxLevel currentLevel:0];
 }
 
-+ (NSArray<File *> *)recursiveFilesExtension:(NSString *)aExtension atPath:(NSString *)aPath {
-    return [[self class] recursiveFilesType:nil extension:aExtension atPath:aPath];
++ (NSArray<File *> *)recursiveFilesExtension:(NSString *)aExtension atPath:(NSString *)aPath  maxLevel:(NSInteger)maxLevel {
+    return [[self class] recursiveFilesType:nil extension:aExtension atPath:aPath maxLevel:maxLevel currentLevel:0];
 }
 
-+ (NSArray<File *> *)recursiveFilesType:(NSFileAttributeType)aType extension:(NSString *)aExtension atPath:(NSString *)aPath {
-    NSArray *currentPathFiles = [[self class] filesAtPath:aPath];
-    NSMutableArray *allFiles = [NSMutableArray arrayWithArray:[[self class] filter:currentPathFiles byType:aType extension:aExtension]];
-    
-    for (File *file in currentPathFiles) {
-        if ([file.fileType isEqualToString:NSFileTypeDirectory]) {
-            NSString *nextPath = [[self class] append:file.name toPath:aPath];
-            NSArray *nextPathFiles = [[self class] recursiveFilesAtPath:nextPath];
-            [allFiles addObjectsFromArray:[[self class] filter:nextPathFiles byType:aType extension:aExtension]];
-        }
-    }
-    
-    return allFiles;
++ (NSArray<File *> *)recursiveFilesType:(NSFileAttributeType)aType extension:(NSString *)aExtension atPath:(NSString *)aPath  maxLevel:(NSInteger)maxLevel {
+    return [[self class] recursiveFilesType:aType extension:aExtension atPath:aPath maxLevel:maxLevel currentLevel:0];
 }
+
 
 #pragma mark - Get attributed content
 
@@ -102,7 +81,53 @@
     return attributedContent;
 }
 
+
+
+
+
+
+
+
 #pragma mark - Privated Methods
+
+#pragma mark - Get Files
+
++ (NSArray<File *> *)searchFilesAtPath:(NSString *)aPath {
+    NSArray *content = [[self class] attributedContentAtPath:aPath];
+    NSMutableArray *files = [NSMutableArray new];
+    
+    for (NSDictionary *attributes in content) {
+        File *file = [[File alloc] initWithDictionary:attributes];
+        [files addObject:file];
+    }
+    
+    return files.copy;
+}
+
+#pragma mark - Recursive
+
++ (NSArray<File *> *)recursiveFilesType:(NSFileAttributeType)aType extension:(NSString *)aExtension atPath:(NSString *)aPath  maxLevel:(NSInteger)maxLevel currentLevel:(NSInteger)currentLevel {
+    
+    NSArray *currentPathFiles = [[self class] searchFilesAtPath:aPath];
+    NSMutableArray *allFiles = [NSMutableArray arrayWithArray:[[self class] filter:currentPathFiles byType:aType extension:aExtension]];
+    
+    NSInteger nextLevel = currentLevel + 1;
+    if (nextLevel > maxLevel) {
+        return allFiles;
+    }
+    
+    for (File *file in currentPathFiles) {
+        if ([file.fileType isEqualToString:NSFileTypeDirectory]) {
+            NSString *nextPath = [[self class] append:file.name toPath:aPath];
+            NSArray *nextPathFiles = [[self class] recursiveFilesType:nil extension:nil atPath:nextPath maxLevel:maxLevel currentLevel:nextLevel];
+            [allFiles addObjectsFromArray:[[self class] filter:nextPathFiles byType:aType extension:aExtension]];
+        }
+    }
+    
+    return allFiles;
+}
+
+#pragma mark - Attributes
 
 + (NSDictionary *)attributesOfPath:(NSString *)aPath {
     NSError *error;
