@@ -21,6 +21,11 @@
     return [DEFAULTFILEMANAGER fileExistsAtPath:aPath];
 }
 
++ (NSString *)currentHomeUserPath {
+    NSURL *url = [DEFAULTFILEMANAGER homeDirectoryForCurrentUser];
+    return url.path;
+}
+
 #pragma mark - Get files
 
 + (NSArray<File *> *)filesAtPath:(NSString *)aPath {
@@ -71,10 +76,10 @@
     NSArray *content = [DEFAULTFILEMANAGER contentsOfDirectoryAtPath:aPath error:&error];
     
     if (!error) {
-        for (NSString *filePath in content) {
-            NSString *fullFilePath = [[self class] append:filePath toPath:aPath];
+        for (NSString *fileName in content) {
+            NSString *fullFilePath = [[self class] append:fileName toPath:aPath];
             NSDictionary *fileAttributes = [[self class] attributesOfPath:fullFilePath];
-            [attributedContent addObject:[[self class] addFile:filePath path:aPath toAttributes:fileAttributes]];
+            [attributedContent addObject:[[self class] addFile:fileName path:aPath toAttributes:fileAttributes]];
         }
     }
     

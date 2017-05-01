@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+@class Emulator;
+
 @interface EmulatorManager : NSObject
+
+- (instancetype __nullable)initWithEmulatorsPath:(NSString *__nonnull)aPath;
+- (NSArray <Emulator *> *__nullable)emulators;
 
 @end

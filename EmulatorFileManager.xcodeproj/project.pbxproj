@@ -12,7 +12,7 @@
 		EA267F121EB60D9E002225CA /* FileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EA267F081EB60D12002225CA /* FileManager.m */; };
 		EA267F131EB60D9E002225CA /* NSArray+FMTools.m in Sources */ = {isa = PBXBuildFile; fileRef = EA267F0E1EB60D2E002225CA /* NSArray+FMTools.m */; };
 		EA267F171EB60E47002225CA /* Emulator.m in Sources */ = {isa = PBXBuildFile; fileRef = EA267F161EB60E47002225CA /* Emulator.m */; };
-		EA267F1B1EB60EE1002225CA /* App.m in Sources */ = {isa = PBXBuildFile; fileRef = EA267F1A1EB60EE1002225CA /* App.m */; };
+		EA267F1B1EB60EE1002225CA /* Application.m in Sources */ = {isa = PBXBuildFile; fileRef = EA267F1A1EB60EE1002225CA /* Application.m */; };
 		EA486F3D1EB23A21008A8A72 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EA486F3C1EB23A21008A8A72 /* main.m */; };
 /* End PBXBuildFile section */
 
@@ -39,8 +39,8 @@
 		EA267F0E1EB60D2E002225CA /* NSArray+FMTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+FMTools.m"; path = "File Manager/Categories/NSArray+FMTools.m"; sourceTree = "<group>"; };
 		EA267F151EB60E47002225CA /* Emulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Emulator.h; path = "Emulator Manager/Emulator/Emulator.h"; sourceTree = "<group>"; };
 		EA267F161EB60E47002225CA /* Emulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Emulator.m; path = "Emulator Manager/Emulator/Emulator.m"; sourceTree = "<group>"; };
-		EA267F191EB60EE1002225CA /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = App.h; path = "Emulator Manager/Emulator/App/App.h"; sourceTree = "<group>"; };
-		EA267F1A1EB60EE1002225CA /* App.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = App.m; path = "Emulator Manager/Emulator/App/App.m"; sourceTree = "<group>"; };
+		EA267F191EB60EE1002225CA /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Application.h; path = "Emulator Manager/Emulator/App/Application.h"; sourceTree = "<group>"; };
+		EA267F1A1EB60EE1002225CA /* Application.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Application.m; path = "Emulator Manager/Emulator/App/Application.m"; sourceTree = "<group>"; };
 		EA486F391EB23A21008A8A72 /* EmulatorFileManager */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = EmulatorFileManager; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA486F3C1EB23A21008A8A72 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,8 +98,8 @@
 		EA267F181EB60EB2002225CA /* Apps */ = {
 			isa = PBXGroup;
 			children = (
-				EA267F191EB60EE1002225CA /* App.h */,
-				EA267F1A1EB60EE1002225CA /* App.m */,
+				EA267F191EB60EE1002225CA /* Application.h */,
+				EA267F1A1EB60EE1002225CA /* Application.m */,
 			);
 			name = Apps;
 			sourceTree = "<group>";
@@ -201,7 +201,7 @@
 			files = (
 				EA267F171EB60E47002225CA /* Emulator.m in Sources */,
 				EA267F101EB60D9E002225CA /* EmulatorManager.m in Sources */,
-				EA267F1B1EB60EE1002225CA /* App.m in Sources */,
+				EA267F1B1EB60EE1002225CA /* Application.m in Sources */,
 				EA267F111EB60D9E002225CA /* File.m in Sources */,
 				EA267F121EB60D9E002225CA /* FileManager.m in Sources */,
 				EA267F131EB60D9E002225CA /* NSArray+FMTools.m in Sources */,

@@ -13,6 +13,13 @@
 
 
 /**
+ Get current user home path
+
+ @return User home path
+ */
++ (NSString *__nonnull)currentHomeUserPath;
+
+/**
  Check if path exist
 
  @param aPath Path to check
