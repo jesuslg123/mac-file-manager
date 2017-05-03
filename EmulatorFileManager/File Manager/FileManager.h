@@ -86,6 +86,15 @@
  */
 + (NSArray <File *>*__nullable)recursiveFilesAtPath:(NSString *__nonnull)aPath maxLevel:(NSInteger)aLevel;
 
+/**
+ Recursive get files filtered by extesion file.
+ 
+ @param aName File nme
+ @param aPath Start path folder
+ @param aLevel Number of deep path to explore, 0 = no levels, NSIntegerMax = Infinite
+ @return List of name matching files found on path and deepest paths
+ */
++ (NSArray<File *> *__nullable)recursiveFilesName:(NSString *__nonnull)aName atPath:(NSString *__nonnull)aPath maxLevel:(NSInteger)aLevel;
 
 /**
  Recursive get files filtered by extesion file.

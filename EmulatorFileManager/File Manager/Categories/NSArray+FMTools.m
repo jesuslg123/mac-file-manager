@@ -17,8 +17,8 @@
 
 
 - (NSArray *)filterBy:(NSString *)aProperty endingValue:(NSString *)aValue {
-    NSPredicate *predicateEqual = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"self.%@ ENDSWITH '%@'",aProperty, aValue]];
-    return [self filteredArrayUsingPredicate:predicateEqual];
+    NSPredicate *predicateEndsWith = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"self.%@ ENDSWITH '%@'",aProperty, aValue]];
+    return [self filteredArrayUsingPredicate:predicateEndsWith];
 }
 
 @end

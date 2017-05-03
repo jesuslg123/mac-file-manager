@@ -55,7 +55,9 @@
         Emulator *simulator = [[Emulator alloc] initWithDevicePlist:deviceProperties file:emulatorPlistFile];
         NSArray <Application *>*simulatorApps = [self getEmulatorApps:simulator];
         [simulator setAplications:simulatorApps];
-        [simulators addObject:simulator];
+        if (simulator.aplications.count > 0) {
+            [simulators addObject:simulator];
+        }
     }
     
     return simulators.copy;
@@ -87,7 +89,7 @@
 - (Application *)getApplication:(NSString *)aPath forEmulator:(Emulator *)aEmulator {
     Application *application;
     
-    NSArray <File *> *appsPlist = [FileManager recursiveFilesExtension:EMULATOR_APPLICATION_PLIST_FILE_NAME atPath:aPath maxLevel:2];
+    NSArray <File *> *appsPlist = [FileManager recursiveFilesName:EMULATOR_APPLICATION_PLIST_FILE_NAME atPath:aPath maxLevel:2];
     if (appsPlist.count > 0) {
         File *appPlist = [appsPlist firstObject];
         NSDictionary *appProperties = [NSDictionary dictionaryWithContentsOfFile:appPlist.fullPath];

@@ -50,6 +50,11 @@
     return [[self class] recursiveFilesType:nil extension:nil atPath:aPath maxLevel:maxLevel currentLevel:0];
 }
 
++ (NSArray<File *> *)recursiveFilesName:(NSString *)aName atPath:(NSString *)aPath maxLevel:(NSInteger)aLevel {
+    NSArray<File *> *files = [[self class] recursiveFilesType:nil extension:nil atPath:aPath maxLevel:aLevel currentLevel:0];
+    return [self filter:files byName:aName];
+}
+
 + (NSArray<File *> *)recursiveFilesType:(NSFileAttributeType)aType atPath:(NSString *)aPath maxLevel:(NSInteger)maxLevel {
     return [[self class] recursiveFilesType:aType extension:nil atPath:aPath maxLevel:maxLevel currentLevel:0];
 }
@@ -157,6 +162,10 @@
 }
 
 #pragma mark - Filters
+
++ (NSArray *)filter:(NSArray *)aFiles byName:(NSString *)aName {
+    return [aFiles filterBy:@"name" value:aName];
+}
 
 + (NSArray *)filter:(NSArray *)aFiles byExtension:(NSString *)aExtension {
     return [aFiles filterBy:@"name" endingValue:aExtension];
