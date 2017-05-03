@@ -127,11 +127,11 @@
     }
     
     for (File *file in currentPathFiles) {
-        if ([file.fileType isEqualToString:NSFileTypeDirectory]) {
+        //if ([file.fileType isEqualToString:NSFileTypeDirectory]) {
             NSString *nextPath = [[self class] append:file.name toPath:aPath];
             NSArray *nextPathFiles = [[self class] recursiveFilesType:nil extension:nil atPath:nextPath maxLevel:maxLevel currentLevel:nextLevel];
             [allFiles addObjectsFromArray:[[self class] filter:nextPathFiles byType:aType extension:aExtension]];
-        }
+        //}
     }
     
     return allFiles;
@@ -141,7 +141,7 @@
 
 + (NSDictionary *)attributesOfPath:(NSString *)aPath {
     NSError *error;
-    return [DEFAULTFILEMANAGER attributesOfItemAtPath:aPath error:&error];
+    return [NSDictionary new];//[DEFAULTFILEMANAGER attributesOfItemAtPath:aPath error:&error];
 }
 
 + (NSDictionary *)addFile:(NSString *)aName path:(NSString *)aPath toAttributes:(NSDictionary *)attributes {
@@ -177,9 +177,9 @@
 
 + (NSArray *)filter:(NSArray *)aFiles byType:(NSFileAttributeType)aType extension:(NSString *)aExtension {
     NSArray *filtered = aFiles.copy;
-    if (aType != nil ) {
+    /*if (aType != nil ) {
         filtered = [[self class] filter:aFiles byType:aType];
-    }
+    }*/
     if (aExtension != nil) {
         filtered = [[self class] filter:filtered byExtension:aExtension];
     }

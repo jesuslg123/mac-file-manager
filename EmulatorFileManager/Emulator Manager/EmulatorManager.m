@@ -13,6 +13,7 @@
 
 #define EMULATORS_DEFAULT_PATH @"%@/Library/Developer/CoreSimulator/Devices"
 #define SIMULATOR_SANDBOX_PATH @"%@/data/Containers/Data/Application"
+#define SIMULATOR_BUNDLE_PATH @"%@/data/Containers/Bundle/Application"
 #define EMULATOR_DEVICE_PLIST_FILE_NAME @"device.plist"
 #define EMULATOR_APPLICATION_CONTAINER_PLIST_FILE_NAME @".com.apple.mobile_container_manager.metadata.plist"
 #define EMULATOR_APPLICATION_PLIST_FILE_NAME @"Info.plist"
@@ -72,7 +73,7 @@
 - (NSArray <Application *> *)getEmulatorApps:(Emulator *)emulator {
     NSMutableArray *apps = [NSMutableArray new];
     
-    NSArray <File *> *appsPlist = [FileManager recursiveFilesExtension:EMULATOR_APPLICATION_CONTAINER_PLIST_FILE_NAME atPath:emulator.path maxLevel:5];
+    NSArray <File *> *appsPlist = [FileManager recursiveFilesExtension:EMULATOR_APPLICATION_CONTAINER_PLIST_FILE_NAME atPath:[NSString stringWithFormat:SIMULATOR_BUNDLE_PATH,  emulator.path] maxLevel:1];
     for (File *appFile  in appsPlist) {
         NSDictionary *appContainerProperties = [NSDictionary dictionaryWithContentsOfFile:appFile.fullPath];
         if (![self isAppleApplication:appContainerProperties]) {
@@ -112,7 +113,7 @@
 
 - (NSArray <File *>*)getApplicationsSandbox:(NSString *)aSimulatorRootPath {
     NSString *simulatorSandboxsRootPath = [NSString stringWithFormat:SIMULATOR_SANDBOX_PATH, aSimulatorRootPath];
-    NSArray <File *> *mobileContainerManagerFiles = [FileManager recursiveFilesExtension:@".mobile_container_manager.metadata.plist" atPath:simulatorSandboxsRootPath maxLevel:NSIntegerMax];
+    NSArray <File *> *mobileContainerManagerFiles = [FileManager recursiveFilesExtension:@".mobile_container_manager.metadata.plist" atPath:simulatorSandboxsRootPath maxLevel:1];
     return mobileContainerManagerFiles;
 }
 
