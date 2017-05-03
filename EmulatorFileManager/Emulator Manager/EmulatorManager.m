@@ -72,7 +72,7 @@
 - (NSArray <Application *> *)getEmulatorApps:(Emulator *)emulator {
     NSMutableArray *apps = [NSMutableArray new];
     
-    NSArray <File *> *appsPlist = [FileManager recursiveFilesExtension:EMULATOR_APPLICATION_CONTAINER_PLIST_FILE_NAME atPath:emulator.path maxLevel:NSIntegerMax];
+    NSArray <File *> *appsPlist = [FileManager recursiveFilesExtension:EMULATOR_APPLICATION_CONTAINER_PLIST_FILE_NAME atPath:emulator.path maxLevel:5];
     for (File *appFile  in appsPlist) {
         NSDictionary *appContainerProperties = [NSDictionary dictionaryWithContentsOfFile:appFile.fullPath];
         if (![self isAppleApplication:appContainerProperties]) {
